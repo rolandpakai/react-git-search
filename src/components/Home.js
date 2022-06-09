@@ -54,7 +54,6 @@ const Home = () => {
             fetch(url)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setSearchResult(data);
             })
         );
@@ -88,11 +87,12 @@ const Home = () => {
 }
 
 
-const Result = (data) => {
+const Result = (props) => {
+    const { data } = props;
     const [result, setResult] = useState([]);
 
     useEffect(() => {
-        setResult(data.data);
+        setResult(data);
     }, [data]);
 
     const handleCloseClick = (e, id) => {
@@ -107,66 +107,94 @@ const Result = (data) => {
     }
 
     if (result) {
-        let userList = result.map(user => {
-            let md = result.length > 3 ? "-2" : "";
-
-            return (
-                    <div className={`col-md${md} animated fadeIn`} key={user.id}>
-                        <a target="#" href={user.html_url}>
-                            <div className="card">
-                                <div className="card-close">
-                                    <button 
-                                        type="button" 
-                                        className="btn-close" 
-                                        aria-label="Close" 
-                                        onClick={e => handleCloseClick(e, user.id)}
-                                    >
-                                        <span aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                <div className="card-body">
-                                    <div className="avatar">
-                                        <center>
-                                            <img
-                                                className="card-img-top"
-                                                src={user.owner.avatar_url}
-                                                alt={`${user.owner.login}`}
-                                            />
-                                        </center>
-                                    </div>  
-                                    <h5 className="card-title">
-                                        <center>
-                                        {user.owner.login}
-                                        </center>
-                                    </h5>
-                                </div>
-                            </div>   
-                        </a>
-                    </div>
-                );
-        });
+        let userList = result.map(user => (
+                <UserCard 
+                    key={user.id}
+                    user={user}
+                    handleCloseClick={handleCloseClick}
+                    md={result.length > 3 ? "-2" : ""}
+                />
+            ));
 
         return (      
             <div className="clearfix">
                 <div className="row">
                     {userList}
                 </div>
-            </div>);
+            </div>
+        );
     }
   };
 
-  const LoadingIndicator = props => {
+const UserCard = (props) => {
+    const { user, handleCloseClick, md} = props;
+    const [isFadingOut, setIsFadingOut] = useState(false);
+
+    const handleOnClick = (e, id) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        setIsFadingOut(true);
+        setTimeout(() => {  
+            handleCloseClick(e, id);
+            setIsFadingOut(false);
+        },300);
+    } 
+
+    let cardClasses = `col-md${md}`;
+
+    if (isFadingOut) {
+        cardClasses += " fade-out"; 
+    }
+
+    return (
+        <div className={cardClasses} key={user.id}>
+            <a target="#" href={user.html_url}>
+                <div className="card">
+                    <div className="card-close">
+                        <button 
+                            type="button" 
+                            className="btn-close" 
+                            aria-label="Close" 
+                            onClick={e => handleOnClick(e, user.id)}
+                        >
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div className="card-body">
+                        <div className="avatar">
+                            <center>
+                                <img
+                                    className="card-img-top"
+                                    src={user.owner.avatar_url}
+                                    alt={`${user.owner.login}`}
+                                />
+                            </center>
+                        </div>  
+                        <h5 className="card-title">
+                            <center>
+                            {user.owner.login}
+                            </center>
+                        </h5>
+                    </div>
+                </div>   
+            </a>
+        </div>
+    );
+};
+
+const LoadingIndicator = props => {
     const { promiseInProgress } = usePromiseTracker({delay: 4000});
-  
+
     return promiseInProgress &&
-      <div
-        className="spinner"
-      >
-      <ThreeDots 
-        color="#2BAD60" 
-      	height={150} 
-	    width={150}  />
-      </div>
-  };
+        <div
+            className="spinner"
+        >
+            <ThreeDots 
+            color="#2BAD60" 
+            height={150} 
+            width={150}  />
+        </div>
+};
 
 export default Home;

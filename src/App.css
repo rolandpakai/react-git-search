@@ -1,3 +1,29 @@
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1040px;
+  }
+}
+
+@-webkit-keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 .App {
   text-align: center;
 }
@@ -101,8 +127,7 @@ footer p a:hover {
   color: rgb(99, 204, 131);
 }
 
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1040px;
-  }
+.fade-out {
+  -webkit-animation: fadeout .3s linear forwards;
+  animation: fadeout .3s linear forwards;
 }
