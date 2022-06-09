@@ -61,6 +61,10 @@ header {
   font-size: 26px;
 }
 
+.card-close {
+  text-align: right;
+}
+
 .avatar {
   width: 140px;
   margin: auto;

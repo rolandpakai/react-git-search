@@ -54,8 +54,7 @@ const Home = () => {
             fetch(url)
             .then(res => res.json())
             .then(data => {
-                //setTimeout(setSearchResult,5000,data);
-                console.log(data)
+                console.log(data);
                 setSearchResult(data);
             })
         );
@@ -63,7 +62,6 @@ const Home = () => {
 
     useEffect(() => {
         if (searchText != '' && searchText != null) {
-            console.log("useEffect search... " +searchText);
             fetchSearch(searchText);
         }
 
@@ -83,60 +81,77 @@ const Home = () => {
         </Header>
         <ResultsWrapper>
             <LoadingIndicator/>
-            <Result data={searchResult} />
+            <Result data={searchResult.items} />
         </ResultsWrapper> 
         </Container>
       );
 }
 
 
-const Result = (result) => {
-    if (result && result.data) {
-        const data = result.data;
-        if (data.message === "Not Found") {
-            return (
-            <div className="notfound">
-                <h2>Oops !!!</h2>
-                <p>Oops no profiles there!. Try Again </p>
-            </div>
-            );
-        } else if(data.items) {
-            let userList = data.items.map(user => {
-            let md = data.items.length > 3 ? "-2" : "";
+const Result = (data) => {
+    const [result, setResult] = useState([]);
+
+    useEffect(() => {
+        setResult(data.data);
+    }, [data]);
+
+    const handleCloseClick = (e, id) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const newResult = result.filter(
+            (user) => user.id !== id
+        );
+
+        setResult(newResult);
+    }
+
+    if (result) {
+        let userList = result.map(user => {
+            let md = result.length > 3 ? "-2" : "";
 
             return (
                     <div className={`col-md${md} animated fadeIn`} key={user.id}>
                         <a target="#" href={user.html_url}>
-                        <div className="card">
-                            <div className="card-body">
-                                <div className="avatar">
-                                    <center>
-                                        <img
-                                            className="card-img-top"
-                                            src={user.owner.avatar_url}
-                                            alt={`${user.owner.login}`}
-                                        />
-                                    </center>
-                                </div>  
-                                <h5 className="card-title">
-                                    <center>
-                                     {user.owner.login}
-                                    </center>
-                                </h5>
-                            </div>
-                        </div>   
+                            <div className="card">
+                                <div className="card-close">
+                                    <button 
+                                        type="button" 
+                                        className="btn-close" 
+                                        aria-label="Close" 
+                                        onClick={e => handleCloseClick(e, user.id)}
+                                    >
+                                        <span aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div className="card-body">
+                                    <div className="avatar">
+                                        <center>
+                                            <img
+                                                className="card-img-top"
+                                                src={user.owner.avatar_url}
+                                                alt={`${user.owner.login}`}
+                                            />
+                                        </center>
+                                    </div>  
+                                    <h5 className="card-title">
+                                        <center>
+                                        {user.owner.login}
+                                        </center>
+                                    </h5>
+                                </div>
+                            </div>   
                         </a>
                     </div>
                 );
-            });
+        });
 
-            return (      
-                <div className="clearfix">
-                    <div className="row">
-                        {userList}
-                    </div>
-                </div>);
-        }
+        return (      
+            <div className="clearfix">
+                <div className="row">
+                    {userList}
+                </div>
+            </div>);
     }
   };
 
