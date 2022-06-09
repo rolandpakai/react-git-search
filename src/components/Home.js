@@ -141,7 +141,7 @@ const UserCard = (props) => {
         },300);
     } 
 
-    let cardClasses = `col-md${md}`;
+    let cardClasses = `col-md${md} user-card`;
 
     if (isFadingOut) {
         cardClasses += " fade-out"; 
