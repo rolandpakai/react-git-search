@@ -2,37 +2,101 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+  text-decoration: none !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.spinner {
+  width: 100%;
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.spinner > div {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.App {
+  font-family: sans-serif;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+header {
+  margin-bottom: 30px;
+}
+
+.col-md-4 {
+  margin-bottom: 30px;
+}
+
+.card {
+  padding: 30px;
+  border: solid 1px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 0 0 12px 3px rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+  margin-top: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: grey;
+  font-size: 1.25rem;
+}
+
+.card-text {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.card-text .fa {
+  font-size: 26px;
+}
+
+.avatar {
+  width: 140px;
+  margin: auto;
+}
+
+.avatar img {
+  border: solid 6px transparent;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.card:hover .avatar img {
+  border-color: rgb(99, 204, 131);
+}
+
+.card:hover .card-title center {
+  font-weight: 700;
+  line-height: 1.4;
+  font-size: 1.5rem;
+  color: darkgrey;
+}
+
+.btn {
+  border-radius: 25px;
+}
+
+footer p {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+footer p a,
+footer p a:hover {
+  color: rgb(99, 204, 131);
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1040px;
   }
 }
+
+
