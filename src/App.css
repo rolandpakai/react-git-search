@@ -6,6 +6,10 @@ a {
   text-decoration: none !important;
 }
 
+.clearfix {
+  margin: 0 auto;
+}
+
 .spinner {
   width: 100%;
   height: 100%;
@@ -98,5 +102,3 @@ footer p a:hover {
     max-width: 1040px;
   }
 }
-
-

@@ -102,8 +102,10 @@ const Result = (result) => {
             );
         } else if(data.items) {
             let userList = data.items.map(user => {
+                let md = data.items.length > 3 ? "-3" : "";
+
                 return (
-                    <div className="col-md-4 animated fadeIn" key={user.id}>
+                    <div className={`col-md${md} animated fadeIn`} key={user.id}>
                         <a target="#" href={user.html_url}>
                         <div className="card">
                             <div className="card-body">
