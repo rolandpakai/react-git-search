@@ -102,9 +102,9 @@ const Result = (result) => {
             );
         } else if(data.items) {
             let userList = data.items.map(user => {
-                let md = data.items.length > 3 ? "-3" : "";
+            let md = data.items.length > 3 ? "-2" : "";
 
-                return (
+            return (
                     <div className={`col-md${md} animated fadeIn`} key={user.id}>
                         <a target="#" href={user.html_url}>
                         <div className="card">
@@ -137,9 +137,6 @@ const Result = (result) => {
                     </div>
                 </div>);
         }
-    } else {
-        console.log("Fetching...");
-      return <div className="center">Fetching data . . .</div>;
     }
   };
 
