@@ -130,6 +130,12 @@ const UserCard = (props) => {
     const { user, handleCloseClick, md} = props;
     const [isFadingOut, setIsFadingOut] = useState(false);
 
+    let cardClasses = `col-md${md} user-card`;
+
+    if (isFadingOut) {
+        cardClasses += " fade-out"; 
+    }
+
     const handleOnClick = (e, id) => {
         e.preventDefault();
         e.stopPropagation();
@@ -141,44 +147,47 @@ const UserCard = (props) => {
         },300);
     } 
 
-    let cardClasses = `col-md${md} user-card`;
+    const handleCardClick = (e, url) => {
+        e.preventDefault();
+        e.stopPropagation();
 
-    if (isFadingOut) {
-        cardClasses += " fade-out"; 
+        window.open(url, '_blank', 'noopener,noreferrer');
     }
 
     return (
-        <div className={cardClasses} key={user.id}>
-            <a target="#" href={user.html_url}>
-                <div className="card">
-                    <div className="card-close">
-                        <button 
-                            type="button" 
-                            className="btn-close" 
-                            aria-label="Close" 
-                            onClick={e => handleOnClick(e, user.id)}
-                        >
-                            <span aria-hidden="true"></span>
-                        </button>
-                    </div>
-                    <div className="card-body">
-                        <div className="avatar">
-                            <center>
-                                <img
-                                    className="card-img-top"
-                                    src={user.owner.avatar_url}
-                                    alt={`${user.owner.login}`}
-                                />
-                            </center>
-                        </div>  
-                        <h5 className="card-title">
-                            <center>
-                            {user.owner.login}
-                            </center>
-                        </h5>
-                    </div>
-                </div>   
-            </a>
+        <div 
+            key={user.id}
+            className={cardClasses} 
+            onClick={e => handleCardClick(e, user.html_url)}
+            >
+            <div className="card">
+                <div className="card-close">
+                    <button 
+                        type="button" 
+                        className="btn-close" 
+                        aria-label="Close" 
+                        onClick={e => handleOnClick(e, user.id)}
+                    >
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div className="card-body">
+                    <div className="avatar">
+                        <center>
+                            <img
+                                className="card-img-top"
+                                src={user.owner.avatar_url}
+                                alt={`${user.owner.login}`}
+                            />
+                        </center>
+                    </div>  
+                    <h5 className="card-title">
+                        <center>
+                        {user.owner.login}
+                        </center>
+                    </h5>
+                </div>
+            </div>   
         </div>
     );
 };
