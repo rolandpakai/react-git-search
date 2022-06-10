@@ -21,19 +21,17 @@ const Result = (props) => {
     }
 
     if (result) {
-        let userList = result.map(user => (
-                <UserCard 
-                    key={user.id}
-                    user={user}
-                    handleCloseClick={handleCloseClick}
-                    md={result.length > 3 ? "-2" : ""}
-                />
-            ));
-
         return (      
             <div className="clearfix">
                 <div className="row">
-                    {userList}
+                {result.map(user => (
+                    <UserCard 
+                        key={user.id}
+                        user={user}
+                        handleCloseClick={handleCloseClick}
+                        md={result.length > 3 ? "-2" : ""}
+                    />
+                ))}
                 </div>
             </div>
         );

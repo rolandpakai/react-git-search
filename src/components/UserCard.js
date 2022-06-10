@@ -10,11 +10,12 @@ const UserCard = (props) => {
         cardClasses += " fade-out"; 
     }
 
-    const handleOnClick = (e, id) => {
+    const handleButtonClick = (e, id) => {
         e.preventDefault();
         e.stopPropagation();
 
         setIsFadingOut(true);
+
         setTimeout(() => {  
             handleCloseClick(e, id);
             setIsFadingOut(false);
@@ -40,7 +41,7 @@ const UserCard = (props) => {
                         type="button" 
                         className="btn-close" 
                         aria-label="Close" 
-                        onClick={e => handleOnClick(e, user.id)}
+                        onClick={e => handleButtonClick(e, user.id)}
                     >
                         <span aria-hidden="true"></span>
                     </button>
@@ -50,14 +51,14 @@ const UserCard = (props) => {
                         <center>
                             <img
                                 className="card-img-top"
-                                src={user.owner.avatar_url}
-                                alt={`${user.owner.login}`}
+                                src={user.avatar_url}
+                                alt={`${user.login}`}
                             />
                         </center>
                     </div>  
                     <h5 className="card-title">
                         <center>
-                        {user.owner.login}
+                        {user.login}
                         </center>
                     </h5>
                 </div>

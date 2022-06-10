@@ -24,12 +24,6 @@ const Header = styled.div`
   `}
 `;
 
-const Wrapper = styled(DivFlexCenter)`
-  height: 100vh;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
 const ResultsWrapper = styled.div`
   display: flex;
   gap: 2rem;
@@ -49,7 +43,7 @@ const Home = () => {
     const [searchResult, setSearchResult] = useState([]); 
 
     const fetchSearch = keyword => {
-        let url = `https://api.github.com/search/repositories?q=${keyword}`;
+        let url = `https://api.github.com/search/users?q=${keyword}`;
         
         trackPromise(
             fetch(url)
@@ -61,7 +55,7 @@ const Home = () => {
     };   
 
     useEffect(() => {
-        if (searchText != '' && searchText != null) {
+        if (searchText != null && searchText !== '') {
             fetchSearch(searchText);
         }
 
@@ -75,7 +69,7 @@ const Home = () => {
         <Container>
         <Header>
             <Title>
-              <GithubIcon /> Github Repository Search
+              <GithubIcon /> Github User Search
             </Title>
             <SearchBar placeholder="Search..." onSubmit={handleSubmit} />
         </Header>
