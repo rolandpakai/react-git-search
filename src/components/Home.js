@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import styled, { css } from "styled-components";
 import { GoMarkGithub as GithubIcon } from "react-icons/go";
-import { DivFlexCenter } from "../styles/styles";
 import { trackPromise } from 'react-promise-tracker';
+import styled, { css } from "styled-components";
+
 import LoadingIndicator from './LoadingIndicator';
 import SearchBar from "./SearchBar";
 import Result from "./Result";
@@ -31,9 +31,12 @@ const ResultsWrapper = styled.div`
   font-size: 0.8rem;
 `;
 
-const Title = styled(DivFlexCenter)`
+const Title = styled.div`
   ${({ theme }) => css`
     font-size: ${theme.fontSizes.title};
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 1rem;
   `}
 `;

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
+
+import styled, { css } from "styled-components";
 
 const Container = styled.div``;
 
@@ -42,7 +43,8 @@ const Icon = styled.div`
   `}
 `;
 
-const SearchBar = ({ value = "", placeholder, onSubmit }) => {
+const SearchBar = (props) => {
+  const { value = "", placeholder, onSubmit } = props;
   const [input, setInput] = useState(value);
 
   const handleInput = (e) => {

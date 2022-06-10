@@ -10,9 +10,9 @@ const LoadingIndicator = props => {
             className="spinner"
         >
             <ThreeDots 
-            color="#2BAD60" 
-            height={150} 
-            width={150}  />
+                color="#2BAD60" 
+                height={150} 
+                width={150}  />
         </div>
 };
 
