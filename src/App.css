@@ -78,7 +78,6 @@ header {
 .card-title {
   margin-top: 20px;
   font-weight: 500;
-  line-height: 1.2;
   color: grey;
   font-size: 1.25rem;
 }
@@ -113,9 +112,7 @@ header {
 }
 
 .card:hover .card-title center {
-  font-weight: 700;
-  line-height: 1.4;
-  font-size: 1.5rem;
+  font-weight: 800;
   color: darkgrey;
 }
 
