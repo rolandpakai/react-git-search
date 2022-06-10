@@ -42,7 +42,7 @@ const Icon = styled.div`
   `}
 `;
 
-function SearchBar({ value = "", placeholder, onSubmit }) {
+const SearchBar = ({ value = "", placeholder, onSubmit }) => {
   const [input, setInput] = useState(value);
 
   const handleInput = (e) => {
